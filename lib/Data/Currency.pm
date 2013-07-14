@@ -24,8 +24,6 @@ use overload
 #    '*='    => \&multiply_in_place,
 #    '/='    => \&divide_in_place,
 
-use vars qw/$VERSION/;
-
 BEGIN {
     use base qw/Class::Accessor::Grouped/;
     use Locale::Currency ();
@@ -505,10 +503,3 @@ good reason to use this. Use the specific class accessors instead.
 
 L<Locale::Currency>, L<Locale::Currency::Format>,
 L<Finance::Currency::Convert::WebserviceX>
-
-=head1 AUTHOR
-
-    Christopher H. Laco
-    CPAN ID: CLACO
-    claco@chrislaco.com
-    http://today.icantfocus.com/blog/
