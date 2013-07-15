@@ -461,7 +461,7 @@ Sames as C<as_string>.
 
 Returns the current objects value as a formatted currency string.
 
-=head2 as_string
+=head2 as_float
 
 Returns the value formatted as float using decimal places specified by currency
 code
