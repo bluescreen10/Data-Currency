@@ -1,8 +1,9 @@
-# $Id: Currency.pm 1830 2007-05-05 01:34:36Z claco $
-
+## no critic (RequireUseStrict)
 package Data::Currency;
+## use critic
 use strict;
 use warnings;
+
 use overload
   '0+'     => sub { shift->value },
   'bool'   => sub { shift->value },
@@ -92,16 +93,15 @@ sub convert {
     my $class = Scalar::Util::blessed($self);
     my $from  = $self->code;
 
-    $to ||= '';
-    if ( uc($from) eq uc($to) ) {
-        return $self;
-    }
-
     croak 'Invalid currency code source: ' . ( $from || 'undef' )
       unless _is_currency_code($from);
 
     croak 'Invalid currency code target: ' . ( $to || 'undef' )
       unless _is_currency_code($to);
+
+    if ( uc($from) eq uc($to) ) {
+        return $self;
+    }
 
     if ( !$self->converter ) {
         $self->converter( $self->converter_class->new );
@@ -135,7 +135,9 @@ sub stringify {
     }
 
     ## funky eval to get string versions of constants back into the values
+    ## no critic (ProhibitStringyEval)
     eval '$format = Locale::Currency::Format::' . $format;
+    ## use critic
 
     croak 'Invalid currency code:  ' . ( $code || 'undef' )
       unless _is_currency_code($code);
@@ -184,7 +186,10 @@ sub set_component_class {
 
     if ($value) {
         if ( !Class::Inspector->loaded($value) ) {
+
+            ## no critic (ProhibitStringyEval)
             eval "use $value";
+            ## use critic
 
             croak "The $field $value could not be loaded: $@" if $@;
         }

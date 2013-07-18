@@ -1,4 +1,4 @@
-#!perl -wT
+#!/usr/bin/env perl
 # $Id: currency.t 1731 2007-02-11 20:35:41Z claco $
 
 use strict;
