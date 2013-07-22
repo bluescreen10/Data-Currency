@@ -14,7 +14,7 @@ use overload
   '/'      => \&_divide,
   '%'      => \&_modulo,
   '<=>'    => \&_three_way_compare,
-  'cmp'    => \&_three_way_compare,
+  'cmp'    => \&_three_way_compare_string,
   'abs'    => \&_abs,
   'int'    => \&_int,
   'neg'    => \&_negate,
@@ -292,6 +292,21 @@ sub _three_way_compare {
     }
 
     return $reversed ? $other <=> $self->value : $self->value <=> $other;
+}
+
+sub _three_way_compare_string {
+    my ( $self, $other, $reversed ) = @_;
+
+    if ( Scalar::Util::blessed($other) && $other->isa(__PACKAGE__) ) {
+        croak "Unable to perform comparison with different currency types"
+          if $self->code ne $other->code;
+
+        $other = $other->as_string;
+    }
+
+    return $reversed
+      ? $other cmp $self->as_string
+      : $self->as_string cmp $other;
 }
 
 sub _abs {
