@@ -215,6 +215,7 @@ sub _add {
         $other = $other->value;
     }
 
+    $other = defined $other ? $other : 0;
     __PACKAGE__->new( $self->value + $other, $self->code, $self->format );
 }
 
@@ -228,6 +229,7 @@ sub _substract {
         $other = $other->value;
     }
 
+    $other = defined $other ? $other : 0;
     my $new_value = $reversed ? $other - $self->value : $self->value - $other;
     __PACKAGE__->new( $new_value, $self->code, $self->format );
 }
@@ -242,6 +244,7 @@ sub _multiply {
         $other = $other->value;
     }
 
+    $other = defined $other ? $other : 0;
     __PACKAGE__->new( $self->value * $other, $self->code, $self->format );
 }
 
@@ -254,6 +257,8 @@ sub _divide {
 
         $other = $other->value;
     }
+
+    $other = defined $other ? $other : 0;
 
     croak "Illegal division by zero"
       if $other == 0
