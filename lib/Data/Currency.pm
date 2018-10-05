@@ -1,5 +1,6 @@
 ## no critic (RequireUseStrict)
 package Data::Currency;
+
 ## use critic
 use strict;
 use warnings;

@@ -1,5 +1,8 @@
 Revision history for Data::Currency
 
+0.05002 
+    - Added [MetaJSON] to dist.ini so releases include a META.json file
+
 0.05001 Sun Jul 14 15:00:00 2013
     - Corrected POD
 
